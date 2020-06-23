@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import GoogleAuth from './google-auth';
 
 class Navbar extends Component {
   state = {
@@ -10,6 +11,7 @@ class Navbar extends Component {
       this.setState({customerView: true});
     } 
     return (
+      <span>
       <nav className="navbar navbar-expand-md bg-dark navbar-dark">
         <div className="navbar-brand">ACS Project</div>
         <ul className="navbar-nav">
@@ -17,7 +19,8 @@ class Navbar extends Component {
           <li className="nav-item"><NavLink className="nav-link" to="/new">New</NavLink></li>
           {this.showCustomerViewDialog()}
         </ul>
-      </nav>
+        <GoogleAuth/>
+      </nav></span>
     );
   }
 
