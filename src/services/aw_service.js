@@ -1,7 +1,11 @@
-import customersData from "./data_repository"
+import customersData from "./data_repository";
+// import servicecreate from "./servicecreate";
 
 export function getCustomers() {
+    // const response = await servicecreate.get();
     return customersData;
+    // console.log(response.data.results);
+    // return response.data.results;
 }
 
 export function getCustomer(id) {
