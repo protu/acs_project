@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import GoogleAuth from './google-auth';
+import GoogleAuth from './googleAuth';
 
 class Navbar extends Component {
   state = {

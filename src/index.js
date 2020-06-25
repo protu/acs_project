@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.css';
-import App from './app';
-import { BrowserRouter } from 'react-router-dom';
+import App from './containers/app';
 import { Provider } from 'react-redux';
 import { createStore, compose, applyMiddleware } from 'redux';
 import reducers from './reducers';
@@ -14,9 +13,7 @@ const store = createStore(reducers, composeEnhancers(applyMiddleware(reduxThunk)
 
 const startingPoint = (
     <Provider store={store}>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
+        <App />
     </Provider>)
 
 ReactDOM.render(startingPoint, document.getElementById("root"))

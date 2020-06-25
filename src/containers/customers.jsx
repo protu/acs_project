@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 // import SearchBar from './components/searchbar';
 // import adventure from './adventure';
 // import Customer from './components/customer';
-import CustomersTable from './components/customers-table';
-import { getCustomers } from './services/aw_service';
+import CustomersTable from '../components/customers-table';
 
 
 class Customers extends Component {
@@ -36,10 +35,6 @@ class Customers extends Component {
         );
     }
 
-    componentDidMount() {
-        const customers = getCustomers();
-        this.setState({customers});
-    }
 }
 
 export default Customers;
