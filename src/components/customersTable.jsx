@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import { GET_CUSTOMERS } from '../actions/types';
-import { connect } from 'react-redux';
 import { getCustomers } from '../actions/customersActions';
+import { connect } from 'react-redux';
 
 class CustomersTable extends Component {
 
     componentDidMount() {
         this.props.getCustomers();
-        console.log(this.props.customers);
     }
 
+
     render() {
+        console.log(this.props.customers);
         return (<div className="container mt-3">
             <table className="table table-responsive-md table-hover">
                 <thead className="bg-primary text-white">
@@ -24,7 +24,7 @@ class CustomersTable extends Component {
                     </tr></thead>
                 <tbody>
                     {this.props.customers.map((customer) => (
-                        <tr key={customer.id} onClick={() => { console.log("Click"); }}>
+                        <tr key={customer.id} onClick={() => { console.log("Click"); this.handlePush(this.props, customer.id) }}>
                             <td>{customer.id}</td>
                             <td>{customer.name}</td>
                             <td>{customer.surname}</td>
@@ -38,6 +38,10 @@ class CustomersTable extends Component {
         </div>);
     }
 
+    handlePush = (props, id) => {
+        props.history.push(`/customer/${id}`);
+    }
+
 }
 
 const mapStateToProps = (state) => {
@@ -48,10 +52,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getCustomers: () => {
-            dispatch ({type: GET_CUSTOMERS});
-        }
+        getCustomers: () => dispatch(getCustomers())
     };
- };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomersTable);

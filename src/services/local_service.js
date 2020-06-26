@@ -7,13 +7,12 @@ export const getCustomers = async ()  => {
     return data.data;
 }
 
-export const getCustomer = async (id) => {
-    let data = await srvreq.get('/' + {id}).then(({data}) => data);
-    return data;
+export const getCustomer =  (id) => {
+    return  srvreq.get('/' + id).then(response => {return response.data});
 }
 
 export const delCustomer = async (id) => {
-    let request = await srvreq.delete('/' + {id})
+    let request = await srvreq.delete('/' + id)
     console.log(request);
 }
 

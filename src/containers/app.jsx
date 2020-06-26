@@ -4,6 +4,8 @@ import { Route, BrowserRouter } from 'react-router-dom';
 import Customer from '../components/customer';
 import CustomersTable from '../components/customersTable';
 import AddCustomer from '../components/addCustomer';
+import { getCustomers } from '../actions/customersActions';
+import { useDispatch } from 'react-redux';
 
 
 class App extends Component {
