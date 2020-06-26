@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import Navbar from '../components/navbar';
+import Navbar from './navbar';
 import { Route, BrowserRouter } from 'react-router-dom';
-import Customer from '../components/customer';
-import CustomersTable from '../components/customersTable';
-import AddCustomer from '../components/addCustomer';
-import { getCustomers } from '../actions/customersActions';
-import { useDispatch } from 'react-redux';
+import Customer from './customer';
+import CustomersTable from './customersTable';
+import AddCustomer from './addCustomer';
+import EditCustomer from './editCustomer';
+import DelCustomer from './delCustomer';
+import Home from './homePage'
 
 
 class App extends Component {
@@ -17,9 +18,12 @@ class App extends Component {
             <div className="container-flex">
                 <BrowserRouter>
                     <Navbar onCustomer={this.state.customerView} />
+                    <Route path="/" exact component={Home} />
                     <Route path="/list" exact component={CustomersTable} />
                     <Route path="/customer/:id" exact component={Customer} />
                     <Route path="/new" exact component={AddCustomer} />
+                    <Route path="/delete" exact component={DelCustomer} />
+                    <Route path="/edit" exact component={EditCustomer} />
                 </BrowserRouter>
             </div>
         );

@@ -18,11 +18,10 @@ class AddCustomer extends Component {
     }
 
     renderInput = ({ input, label, meta }) => {
-        console.log(meta);
         return (
-            <div className="field">
-                <label>{label}</label>
-                <input {...input} />
+            <div className="form-group">
+                <label htmlFor={input.name}>{label}</label>
+                <input id={input.name} {...input} className="form-control"/>
                 {this.renderError(meta)}
             </div>
         );
@@ -33,10 +32,11 @@ class AddCustomer extends Component {
     }
 
     render() {
-        console.log(this.props);
         return (
+            <div className="row mt-4">
+                <div className="col-6 mx-auto">
             <form onSubmit={this.props.handleSubmit(this.onSubmit)}
-                className="ui form error"
+                // className="ui form error"
             >
                 <Field
                     name="id"
@@ -60,8 +60,9 @@ class AddCustomer extends Component {
                     label="Enter email"
                 />
 
-                <button className="ui button primary">Submit</button>
+                <button className="btn btn-primary">Submit</button>
             </form>
+            </div></div>
         )
     }
 }

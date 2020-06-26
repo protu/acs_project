@@ -8,9 +8,7 @@ class CustomersTable extends Component {
         this.props.getCustomers();
     }
 
-
     render() {
-        console.log(this.props.customers);
         return (<div className="container mt-3">
             <table className="table table-responsive-md table-hover">
                 <thead className="bg-primary text-white">
@@ -24,7 +22,7 @@ class CustomersTable extends Component {
                     </tr></thead>
                 <tbody>
                     {this.props.customers.map((customer) => (
-                        <tr key={customer.id} onClick={() => { console.log("Click"); this.handlePush(this.props, customer.id) }}>
+                        <tr key={customer.id} onClick={() => {this.handlePush(this.props, customer.id) }}>
                             <td>{customer.id}</td>
                             <td>{customer.name}</td>
                             <td>{customer.surname}</td>
@@ -52,7 +50,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getCustomers: () => dispatch(getCustomers())
+        getCustomers: () => dispatch(getCustomers()),
     };
 };
 
