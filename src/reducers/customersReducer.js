@@ -10,7 +10,7 @@ export default (state = INITIAL_STATE, action) => {
         case GET_CUSTOMERS:
             return { ...state, customers: action.payload };
         case ADD_CUSTOMER:
-            return state;
+            return {...state}
         case DEL_CUSTOMER:
             return { ...state, current: action.payload };
         case EDIT_CUSTOMER:

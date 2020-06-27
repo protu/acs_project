@@ -56,6 +56,16 @@ class AddCustomer extends Component {
                             component={this.renderInput}
                             label="Enter email"
                         />
+                        <Field
+                            name="telephone"
+                            component={this.renderInput}
+                            label="Enter phone number"
+                        />
+                        <Field
+                            name="cityid"
+                            component={this.renderInput}
+                            label="Enter city ID"
+                        />
                         <button className="btn btn-primary">Submit</button>
                     </form>
                 </div></div>

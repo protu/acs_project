@@ -36,7 +36,6 @@ class EditCustomer extends Component {
             <div className="row mt-4">
                 <div className="col-6 mx-auto">
                     <form onSubmit={this.props.handleSubmit(this.onSubmit)} >
-                      
                         <Field
                             name="name"
                             component={this.renderInput}
@@ -51,6 +50,16 @@ class EditCustomer extends Component {
                             name="email"
                             component={this.renderInput}
                             label="Enter email"
+                        />
+                        <Field
+                            name="telephone"
+                            component={this.renderInput}
+                            label="Enter phone number"
+                        />
+                        <Field
+                            name="cityid"
+                            component={this.renderInput}
+                            label="Enter city ID"
                         />
                         <button className="btn btn-primary">Submit</button>
                     </form>

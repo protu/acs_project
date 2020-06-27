@@ -6,18 +6,16 @@ import CustomersTable from './customersTable';
 import AddCustomer from './addCustomer';
 import EditCustomer from './editCustomer';
 import DelCustomer from './delCustomer';
-import Home from './homePage'
+import Home from './homePage';
 
 
 class App extends Component {
-    state = {
-        customerView: false
-    }
+    
     render() {
         return (
             <div className="container-flex">
                 <BrowserRouter>
-                    <Navbar onCustomer={this.state.customerView} />
+                    <Navbar/>
                     <Route path="/" exact component={Home} />
                     <Route path="/list" exact component={CustomersTable} />
                     <Route path="/customer/:id" exact component={Customer} />
