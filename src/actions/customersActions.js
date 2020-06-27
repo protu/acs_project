@@ -1,5 +1,5 @@
-import {getCustomersService, addCustomerService, delCustomerService} from '../services/local_service';
-import { GET_CUSTOMERS, ADD_CUSTOMER, DEL_CUSTOMER, CURR_CUSTOMER} from './types';
+import { getCustomersService, addCustomerService, delCustomerService, editCustomerService } from '../services/local_service';
+import { GET_CUSTOMERS, ADD_CUSTOMER, DEL_CUSTOMER, CURR_CUSTOMER, EDIT_CUSTOMER } from './types';
 
 export const getCustomers = () => async dispatch => {
   const response = await getCustomersService();
@@ -11,9 +11,9 @@ export const getCustomers = () => async dispatch => {
 
 export const addCustomer = formValues => async dispatch => {
   const response = await addCustomerService(formValues);
-  dispatch({ 
+  dispatch({
     type: ADD_CUSTOMER,
-    payload: response.data 
+    payload: response.data
   })
 }
 
@@ -25,7 +25,15 @@ export const delCustomer = customer => async dispatch => {
   })
 }
 
-export const currCustomer = customer =>  {
+export const editCustomer = customer => async dispatch => {
+  const response = await editCustomerService(customer);
+  dispatch({
+    type: EDIT_CUSTOMER,
+    payload: customer
+  })
+}
+
+export const currCustomer = customer => {
   return ({
     type: CURR_CUSTOMER,
     payload: customer

@@ -5,14 +5,16 @@ import { navCustomer, navMain } from '../actions/navActions';
 import { currCustomer } from '../actions/customersActions'
 
 class Customer extends Component {
-    state = {
+     state = {
         customer: {}
     }
-
+  
     componentDidMount() {
         this.props.navCustomer();
         const id = this.props.match.params.id;
-        getCustomerService(id).then(response => { this.setState({ customer: response.data }) });
+        getCustomerService(id).then(response => {
+            this.setState({ customer: response.data });
+        });
     }
 
     componentWillUnmount() {
@@ -22,7 +24,6 @@ class Customer extends Component {
     render() {
         const customer = this.state.customer;
         this.props.currCustomer(customer);
-
         return (<div className="mt-4 ml-4">
             <h3>Name: {customer.name + " " + customer.surname}</h3>
             <dl>
@@ -35,6 +36,12 @@ class Customer extends Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        customer: state.customers.currCustomer
+    }
+}
+
 const mapDispatchToProps = dispatch => {
     return {
         navCustomer: () => dispatch(navCustomer()),
@@ -43,4 +50,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(Customer);
+export default connect(mapStateToProps, mapDispatchToProps)(Customer);

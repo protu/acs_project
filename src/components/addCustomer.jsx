@@ -21,7 +21,7 @@ class AddCustomer extends Component {
         return (
             <div className="form-group">
                 <label htmlFor={input.name}>{label}</label>
-                <input id={input.name} {...input} className="form-control"/>
+                <input id={input.name} {...input} className="form-control" />
                 {this.renderError(meta)}
             </div>
         );
@@ -35,34 +35,30 @@ class AddCustomer extends Component {
         return (
             <div className="row mt-4">
                 <div className="col-6 mx-auto">
-            <form onSubmit={this.props.handleSubmit(this.onSubmit)}
-                // className="ui form error"
-            >
-                <Field
-                    name="id"
-                    component={this.renderInput}
-                    label="Enter id"
-                />
-                <Field
-                    name="name"
-                    component={this.renderInput}
-                    label="Enter name"
-                />
-
-                <Field
-                    name="surname"
-                    component={this.renderInput}
-                    label="Enter surname"
-                />
-                <Field
-                    name="email"
-                    component={this.renderInput}
-                    label="Enter email"
-                />
-
-                <button className="btn btn-primary">Submit</button>
-            </form>
-            </div></div>
+                    <form onSubmit={this.props.handleSubmit(this.onSubmit)} >
+                        <Field
+                            name="id"
+                            component={this.renderInput}
+                            label="Enter id"
+                        />
+                        <Field
+                            name="name"
+                            component={this.renderInput}
+                            label="Enter name"
+                        />
+                        <Field
+                            name="surname"
+                            component={this.renderInput}
+                            label="Enter surname"
+                        />
+                        <Field
+                            name="email"
+                            component={this.renderInput}
+                            label="Enter email"
+                        />
+                        <button className="btn btn-primary">Submit</button>
+                    </form>
+                </div></div>
         )
     }
 }
@@ -81,7 +77,10 @@ const validate = formValues => {
 
 const formWrapped = reduxForm({
     form: 'addCustomer',
-    validate
+    validate,
+    onSubmitSuccess: (result, dispatch, props) => {
+        props.history.push(`/list`)
+    }
 })(AddCustomer);
 
 export default connect(null, { addCustomer })(formWrapped);

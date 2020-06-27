@@ -18,4 +18,8 @@ export async function addCustomerService(customer) {
     return await srvreq.post('', customer);
 }
 
+export async function editCustomerService(customer) {
+    return await srvreq.put('/' + customer.id, customer);
+}
+
 export default srvreq;

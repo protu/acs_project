@@ -9,7 +9,7 @@ class Navbar extends Component {
   render() {
     return (
       <span>
-        <nav className="navbar navbar-expand-md bg-dark navbar-dark">
+        <nav className="navbar navbar-expand-md bg-dark navbar-dark sticky-top">
           <NavLink className="navbar-brand" to="/">ACS Project</NavLink>
           <ul className="navbar-nav">
             <li className="nav-item"><NavLink className="nav-link" to="/list">List</NavLink></li>
@@ -25,7 +25,7 @@ class Navbar extends Component {
     if (this.props.menu === NAV_CUSTOMER) {
       return (
         <React.Fragment>
-          <li className="nav-item"><NavLink className="nav-link" to="/edit" onClick={() => { console.log("DEL click"); }}>Edit</NavLink></li>
+          <li className="nav-item"><NavLink className="nav-link" to="/edit">Edit</NavLink></li>
           <li className="nav-item"><NavLink className="nav-link" to="/delete">Delete</NavLink></li>
         </React.Fragment>
       );
