@@ -20,6 +20,10 @@ class CustomersTable extends Component {
 
     handlePageSizeChange = (size) => {
         this.setState({pageSize: size});
+        let maxPagesCount = Math.ceil(this.props.customers.length / size);
+        if (this.state.currentPage > maxPagesCount) {
+            this.setState({currentPage: maxPagesCount});
+        }
     }
 
     render() {
