@@ -22,7 +22,7 @@ class Pagination extends Component {
                     <li className="page-item"><button className="page-link" href="#"
                         onClick={() => onPageChange(currentPage + 1 < pagesCount ? currentPage + 1 : pagesCount)}>Next</button></li>
                     <span className="nav-link ml-auto">Records per page: </span>
-                        {[5, 10, 20, 50].map((size) => (
+                        {[10, 20, 50].map((size) => (
                             <li key={`size${size}`} className={size === pageSize ? 'page-item active' : 'page-item'}>
                                 <button href="#" className="page-link" onClick={() => onPageSizeChange(size)}>{size}</button>
                             </li>

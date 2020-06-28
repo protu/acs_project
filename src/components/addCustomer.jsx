@@ -37,32 +37,32 @@ class AddCustomer extends Component {
                 <div className="col-6 mx-auto">
                     <form onSubmit={this.props.handleSubmit(this.onSubmit)} >
                         <Field
-                            name="id"
+                            name="Id"
                             component={this.renderInput}
                             label="Enter id"
                         />
                         <Field
-                            name="name"
+                            name="Name"
                             component={this.renderInput}
                             label="Enter name"
                         />
                         <Field
-                            name="surname"
+                            name="Surname"
                             component={this.renderInput}
                             label="Enter surname"
                         />
                         <Field
-                            name="email"
+                            name="Email"
                             component={this.renderInput}
                             label="Enter email"
                         />
                         <Field
-                            name="telephone"
+                            name="Telephone"
                             component={this.renderInput}
                             label="Enter phone number"
                         />
                         <Field
-                            name="cityid"
+                            name="CityId"
                             component={this.renderInput}
                             label="Enter city ID"
                         />
@@ -76,11 +76,14 @@ class AddCustomer extends Component {
 const validate = formValues => {
     const errors = {};
 
-    if (!formValues.id) {
-        errors.title = "You must enter a id";
+    if (!formValues.Name) {
+        errors.title = "You must enter a name";
     }
-    if (!formValues.name) {
-        errors.description = "You must enter a name";
+    if (!formValues.Surname) {
+        errors.description = "You must enter a surname";
+    }
+    if (!formValues.Email) {
+        errors.description = "You must enter a e-mail";
     }
     return errors;
 }

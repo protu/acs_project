@@ -11,11 +11,22 @@ class CustomersTable extends Component {
     state = {
         pageSize: 10,
         currentPage: 1,
+        filter: {search: ""}
     }
 
     componentDidMount() {
         this.props.getCustomers();
     }
+
+    static getDerivedStateFromProps(props, current_state) {
+        if (current_state.filter.search !== props.filter.search) {
+          return {
+            filter: props.filter,
+            currentPage: 1
+          }
+        }
+        return null
+      }
 
     handlePageChange = (page) => {
         this.setState({ currentPage: page });
@@ -38,14 +49,15 @@ class CustomersTable extends Component {
 
     render() {
         var customers = this.props.customers;
-        if (this.props.filter !== "" && this.props.filter !== undefined) {
-            customers = search(this.props.customers, this.props.filter);
+        if (this.state.sortKey !== null) {
+            customers.sort(compareValues(this.state.sortKey, this.state.sortAsc));
+        }
+        if (this.props.filter.search !== "" && this.props.filter.search !== undefined) {
+            customers = search(this.props.customers, this.props.filter.search);
         }
         let customersCount = customers.length;
         let customersShown = paginate(customers, this.state.currentPage, this.state.pageSize)
-        if (this.state.sortKey !== null) {
-            customersShown.sort(compareValues(this.state.sortKey, this.state.sortAsc));
-        }
+        
 
         return (<div className="container mt-3">
             <Searchbar />
@@ -59,22 +71,22 @@ class CustomersTable extends Component {
             <table className="table table-responsive-md table-hover">
                 <thead className="bg-primary text-white">
                     <tr>
-                        <th onClick={() => this.handleTableSort("id")}>ID</th>
-                        <th onClick={() => this.handleTableSort("name")}>Name</th>
-                        <th onClick={() => this.handleTableSort("surname")}>Surname</th>
-                        <th onClick={() => this.handleTableSort("email")}>E-mail</th>
-                        <th onClick={() => this.handleTableSort("telephone")}>Telephone</th>
-                        <th onClick={() => this.handleTableSort("cityid")}>City ID</th>
+                        <th onClick={() => this.handleTableSort("Id")}>ID</th>
+                        <th onClick={() => this.handleTableSort("Iame")}>Name</th>
+                        <th onClick={() => this.handleTableSort("Surname")}>Surname</th>
+                        <th onClick={() => this.handleTableSort("Email")}>E-mail</th>
+                        <th onClick={() => this.handleTableSort("Telephone")}>Telephone</th>
+                        <th onClick={() => this.handleTableSort("CityId")}>City ID</th>
                     </tr></thead>
                 <tbody>
                     {customersShown.map((customer) => (
-                        <tr key={customer.id} onClick={() => { this.handlePush(this.props, customer.id) }}>
-                            <td>{customer.id}</td>
-                            <td>{customer.name}</td>
-                            <td>{customer.surname}</td>
-                            <td>{customer.email}</td>
-                            <td>{customer.telephone}</td>
-                            <td>{customer.cityid}</td>
+                        <tr key={customer.Id} onClick={() => { this.handlePush(this.props, customer.Id) }}>
+                            <td>{customer.Id}</td>
+                            <td>{customer.Name}</td>
+                            <td>{customer.Surname}</td>
+                            <td>{customer.Email}</td>
+                            <td>{customer.Telephone}</td>
+                            <td>{customer.CityId}</td>
                         </tr>
                     ))}
                 </tbody>

@@ -3,7 +3,7 @@ import { GET_CUSTOMERS, ADD_CUSTOMER, DEL_CUSTOMER, EDIT_CUSTOMER, CURR_CUSTOMER
 const INITIAL_STATE = {
     customers: [],
     current: {},
-    filter: ""
+    filter: {search: ""}
 }
 
 export default (state = INITIAL_STATE, action) => {

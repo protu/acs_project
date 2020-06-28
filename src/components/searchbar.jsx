@@ -16,7 +16,7 @@ class SearchBar extends Component {
     }
 
     onSubmit = formValues => {
-        this.props.filterCustomer(formValues.search);
+        this.props.filterCustomer(formValues);
     }
 
     render() {
@@ -36,4 +36,10 @@ const formWrapped = reduxForm({
     form: 'searchBar',
 })(SearchBar)
 
-export default connect(null, { filterCustomer })(formWrapped);
+const mapStateToProps = state => {
+    return ({
+        initialValues: state.customers.filter
+    })
+}
+
+export default connect(mapStateToProps, { filterCustomer })(formWrapped);

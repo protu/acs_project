@@ -11,7 +11,7 @@ class DelCustomer extends Component {
             return (<div className="text-danger mt-5 ml-5">Please choose customer to delete</div>);
         }
         this.props.delCustomer(customer);
-        return (<div className="text-danger mt-5 ml-5">Deleted customer {customer.name} {customer.surname}</div>);
+        return (<div className="text-danger mt-5 ml-5">Deleted customer {customer.Name} {customer.Surname}</div>);
     }
 }
 
