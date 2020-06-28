@@ -14,7 +14,9 @@ class Navbar extends Component {
           <NavLink className="navbar-brand" to="/">ACS Project</NavLink>
           <ul className="navbar-nav">
             <li className="nav-item"><NavLink className="nav-link" to="/list">List</NavLink></li>
-            <li className="nav-item"><NavLink className="nav-link" to="/new">New</NavLink></li>
+            {this.props.authenticated &&
+              <li className="nav-item"><NavLink className="nav-link" to="/new">New</NavLink></li>
+            }
             {this.showCustomerViewDialog()}
           </ul>
           <GoogleAuth />
@@ -23,7 +25,7 @@ class Navbar extends Component {
   }
 
   showCustomerViewDialog = () => {
-    if (this.props.menu === NAV_CUSTOMER) {
+    if (this.props.menu === NAV_CUSTOMER && this.props.authenticated) {
       return (
         <React.Fragment>
           <li className="nav-item"><NavLink className="nav-link" to="/edit">Edit</NavLink></li>
@@ -37,7 +39,8 @@ class Navbar extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    menu: state.nav.menu
+    menu: state.nav.menu,
+    authenticated: state.auth.isSignedIn
   }
 };
 
