@@ -3,11 +3,12 @@ import { getCustomers } from '../actions/customersActions';
 import { connect } from 'react-redux';
 import Pagination from './pagination';
 import { paginate } from '../services/paginate';
+import { compareValues } from '../services/compare';
 
 class CustomersTable extends Component {
     state = {
         pageSize: 10,
-        currentPage: 1
+        currentPage: 1,
     }
 
     componentDidMount() {
@@ -15,42 +16,52 @@ class CustomersTable extends Component {
     }
 
     handlePageChange = (page) => {
-        this.setState({currentPage: page});
+        this.setState({ currentPage: page });
     }
 
     handlePageSizeChange = (size) => {
-        this.setState({pageSize: size});
+        this.setState({ pageSize: size });
         let maxPagesCount = Math.ceil(this.props.customers.length / size);
         if (this.state.currentPage > maxPagesCount) {
-            this.setState({currentPage: maxPagesCount});
+            this.setState({ currentPage: maxPagesCount });
         }
+    }
+
+    handleTableSort = (sortKey, sortAsc = true) => {
+        if (sortKey === this.state.sortKey) {
+            sortAsc = !this.state.sortAsc;
+        }
+        this.setState({ sortKey, sortAsc });
     }
 
     render() {
 
         let customersCount = this.props.customers.length;
-        let customers = paginate(this.props.customers, this.state.currentPage, this.state.pageSize);
- 
+        let customersShown = paginate(this.props.customers, this.state.currentPage, this.state.pageSize)
+        if (this.state.sortKey !== null) {
+            customersShown.sort(compareValues(this.state.sortKey, this.state.sortAsc));
+        }
+
         return (<div className="container mt-3">
             <Pagination
                 pageSize={this.state.pageSize}
                 currentPage={this.state.currentPage}
                 itemsCount={customersCount}
                 onPageChange={this.handlePageChange}
-                onPageSizeChange = {this.handlePageSizeChange}
+                onPageSizeChange={this.handlePageSizeChange}
             />
             <table className="table table-responsive-md table-hover">
                 <thead className="bg-primary text-white">
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Surname</th>
-                        <th>E-mail</th>
-                        <th>Telephone</th>
-                        <th>City ID</th>
+                        <th onClick={() => this.handleTableSort("id")}>ID</th>
+                        <th onClick={() => this.handleTableSort("name")}>Name</th>
+                        <th onClick={() => this.handleTableSort("surname")}>Surname</th>
+                        <th onClick={() => this.handleTableSort("email")}>E-mail</th>
+                        <th onClick={() => this.handleTableSort("telephone")}>Telephone</th>
+                        <th onClick={() => this.handleTableSort("cityid")}>City ID</th>
                     </tr></thead>
                 <tbody>
-                    {customers.map((customer) => (
+                    {customersShown.map((customer) => (
                         <tr key={customer.id} onClick={() => { this.handlePush(this.props, customer.id) }}>
                             <td>{customer.id}</td>
                             <td>{customer.name}</td>
