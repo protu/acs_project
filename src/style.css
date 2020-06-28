@@ -25,3 +25,7 @@ table th {
 .headerSortUp {
   padding-right: 10px;
 }
+
+.font-medium p {
+  font-size: medium;
+}

@@ -79,6 +79,7 @@ class CustomersTable extends Component {
                     ))}
                 </tbody>
             </table>
+            <p>Total customers found: {customersCount}</p>
         </div>);
     }
 
