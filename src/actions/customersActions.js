@@ -1,5 +1,5 @@
 import { getCustomersService, addCustomerService, delCustomerService, editCustomerService } from '../services/local_service';
-import { GET_CUSTOMERS, ADD_CUSTOMER, DEL_CUSTOMER, CURR_CUSTOMER, EDIT_CUSTOMER } from './types';
+import { GET_CUSTOMERS, ADD_CUSTOMER, DEL_CUSTOMER, CURR_CUSTOMER, EDIT_CUSTOMER, FILTER_CUSTOMER } from './types';
 
 export const getCustomers = () => async dispatch => {
   const response = await getCustomersService();
@@ -40,3 +40,9 @@ export const currCustomer = customer => {
   })
 }
 
+export const filterCustomer = search => {
+  return({
+    type: FILTER_CUSTOMER,
+    filter: search
+  })
+}

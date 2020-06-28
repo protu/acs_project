@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import Pagination from './pagination';
 import { paginate } from '../services/paginate';
 import { compareValues } from '../services/compare';
+import Searchbar from './searchbar';
+import search from '../services/search';
 
 class CustomersTable extends Component {
     state = {
@@ -35,14 +37,18 @@ class CustomersTable extends Component {
     }
 
     render() {
-
-        let customersCount = this.props.customers.length;
-        let customersShown = paginate(this.props.customers, this.state.currentPage, this.state.pageSize)
+        var customers = this.props.customers;
+        if (this.props.filter !== "" && this.props.filter !== undefined) {
+            customers = search(this.props.customers, this.props.filter);
+        }
+        let customersCount = customers.length;
+        let customersShown = paginate(customers, this.state.currentPage, this.state.pageSize)
         if (this.state.sortKey !== null) {
             customersShown.sort(compareValues(this.state.sortKey, this.state.sortAsc));
         }
 
         return (<div className="container mt-3">
+            <Searchbar />
             <Pagination
                 pageSize={this.state.pageSize}
                 currentPage={this.state.currentPage}
@@ -84,7 +90,8 @@ class CustomersTable extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        customers: state.customers.customers
+        customers: state.customers.customers,
+        filter: state.customers.filter
     }
 };
 

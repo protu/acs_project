@@ -10,6 +10,7 @@ export const ADD_CUSTOMER = 'ADD_CUSTOMER';
 export const DEL_CUSTOMER = 'DEL_CUSTOMER';
 export const EDIT_CUSTOMER = 'EDIT_CUSTOMER';
 export const CURR_CUSTOMER = 'CURR_CUSTOMER';
+export const FILTER_CUSTOMER = 'FILTER_CUSTOMER';
 
 // Navbar
 export const NAV_CUSTOMER = 'NAV_CUSTOMER';
