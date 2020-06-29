@@ -77,4 +77,10 @@ export async function addItemService(item, token) {
     return await srvreq.post('/additem', item);
 }
 
+// Other
+
+export function getCitiesService() {
+    return srvreq.get('/cities');
+}
+
 export default srvreq;

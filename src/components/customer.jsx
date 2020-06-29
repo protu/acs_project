@@ -15,6 +15,8 @@ class Customer extends Component {
 
     render() {
         const customer = this.props.customer;
+        const city = this.props.cities.find(city => city.Id === customer.CityId);
+        console.log(city);
         return (
             <div>
                 <div className="mt-4 ml-4">
@@ -22,7 +24,7 @@ class Customer extends Component {
                     <dl>
                         <dt className="row col-sm-2">Email:</dt><dd className="col-sm-5">{customer.Email}</dd>
                         <dt className="row col-sm-2">Telephone:</dt><dd className="col-sm-5">{customer.Telephone}</dd>
-                        <dt className="row col-sm-2">City Id:</dt><dd className="col-sm-5">{customer.CityId}</dd>
+                        <dt className="row col-sm-2">City:</dt><dd className="col-sm-5">{city.Name}</dd>
                     </dl>
                 </div>
                 {this.props.authenticated && <BillsTable />}
@@ -35,7 +37,8 @@ class Customer extends Component {
 const mapStateToProps = state => {
     return {
         customer: state.customers.current,
-        authenticated: state.auth.isSignedIn
+        authenticated: state.auth.isSignedIn,
+        cities: state.support.cities
     }
 }
 

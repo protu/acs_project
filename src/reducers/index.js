@@ -5,6 +5,7 @@ import customersReducer from './customersReducer';
 import navReducer from './navReducer';
 import billReducer from './billReduceer';
 import itemReducer from './itemsReducer';
+import supportReducer from './supportReducer';
 
 export default combineReducers({
   auth: authReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
   form: formReducer,
   nav: navReducer,
   bill: billReducer,
-  item: itemReducer
+  item: itemReducer,
+  support: supportReducer
 });

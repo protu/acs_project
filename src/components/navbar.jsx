@@ -17,13 +17,13 @@ class NavigationBar extends Component {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <NavDropdown title="Customers" id="basic-nav-dropdown">
-              <NavDropdown.Item><NavLink className="dropdown-item" to="/list">List</NavLink></NavDropdown.Item>
+              <NavLink className="dropdown-item" to="/list">List</NavLink>
               {this.props.authenticated &&
-                <NavDropdown.Item><NavLink className="dropdown-item" to="/new">New</NavLink></NavDropdown.Item>}
+                <NavLink className="dropdown-item" to="/new">New</NavLink>}
               {this.showCustomerViewDialog()}
             </NavDropdown>
             {this.props.menu === NAV_CUSTOMER && this.props.authenticated &&
-            <Nav.Link href="/addbill">New Bill</Nav.Link>
+              <Nav.Link href="/addbill">New Bill</Nav.Link>
             }
           </Nav>
           <AwAuth />
@@ -36,8 +36,8 @@ class NavigationBar extends Component {
     if (this.props.menu === NAV_CUSTOMER && this.props.authenticated) {
       return (
         <React.Fragment>
-          <NavDropdown.Item><NavLink className="dropdown-item" to="/edit">Edit</NavLink></NavDropdown.Item>
-          <NavDropdown.Item><NavLink className="dropdown-item" to="/delete">Delete</NavLink></NavDropdown.Item>
+          <NavLink className="dropdown-item" to="/edit">Edit</NavLink>
+          <NavLink className="dropdown-item" to="/delete">Delete</NavLink>
         </React.Fragment>
       );
     }

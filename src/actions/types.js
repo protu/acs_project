@@ -36,3 +36,7 @@ export const FILTER_ITEM = 'FILTER_ITEM';
 // Navbar
 export const NAV_CUSTOMER = 'NAV_CUSTOMER';
 export const NAV_MAIN = 'NAV_MAIN';
+
+// Support
+
+export const GET_CITIES = 'GET_CITIES';

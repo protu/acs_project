@@ -1,32 +1,37 @@
 import React, { Component } from 'react';
 import { getCustomers, currCustomer } from '../actions/customersActions';
+import { getCities } from '../actions/supportActions';
 import { connect } from 'react-redux';
 import Pagination from './pagination';
 import { paginate } from '../services/paginate';
 import { compareValues } from '../services/compare';
 import Searchbar from './searchbar';
 import search from '../services/search';
+import { leftJoin } from '../services/join';
+import _ from 'lodash';
+
 
 class CustomersTable extends Component {
     state = {
         pageSize: 10,
         currentPage: 1,
-        filter: {search: ""}
+        filter: { search: "" }
     }
 
     componentDidMount() {
         this.props.getCustomers();
+        this.props.getCities();
     }
 
     static getDerivedStateFromProps(props, current_state) {
         if (current_state.filter.search !== props.filter.search) {
-          return {
-            filter: props.filter,
-            currentPage: 1
-          }
+            return {
+                filter: props.filter,
+                currentPage: 1
+            }
         }
         return null
-      }
+    }
 
     handlePageChange = (page) => {
         this.setState({ currentPage: page });
@@ -48,16 +53,21 @@ class CustomersTable extends Component {
     }
 
     render() {
-        var customers = this.props.customers;
+        var cities = this.props.cities.map(o => _(o)
+            .omit('StateId')
+            .mapKeys((value, key) => { return (key === 'Name') ? 'City' + key : key })
+            .value()
+        );
+        var customers = leftJoin(this.props.customers, cities, "CityId", "Id");
         if (this.state.sortKey !== null) {
             customers.sort(compareValues(this.state.sortKey, this.state.sortAsc));
         }
         if (this.props.filter.search !== "" && this.props.filter.search !== undefined) {
-            customers = search(this.props.customers, this.props.filter.search);
+            customers = search(customers, this.props.filter.search);
         }
         let customersCount = customers.length;
         let customersShown = paginate(customers, this.state.currentPage, this.state.pageSize)
-        
+
 
         return (<div className="container mt-3">
             <Searchbar />
@@ -76,7 +86,7 @@ class CustomersTable extends Component {
                         <th onClick={() => this.handleTableSort("Surname")}>Surname</th>
                         <th onClick={() => this.handleTableSort("Email")}>E-mail</th>
                         <th onClick={() => this.handleTableSort("Telephone")}>Telephone</th>
-                        <th onClick={() => this.handleTableSort("CityId")}>City ID</th>
+                        <th onClick={() => this.handleTableSort("CityName")}>City</th>
                     </tr></thead>
                 <tbody>
                     {customersShown.map((customer) => (
@@ -86,7 +96,7 @@ class CustomersTable extends Component {
                             <td>{customer.Surname}</td>
                             <td>{customer.Email}</td>
                             <td>{customer.Telephone}</td>
-                            <td>{customer.CityId}</td>
+                            <td>{customer.CityName}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -106,14 +116,16 @@ class CustomersTable extends Component {
 const mapStateToProps = (state) => {
     return {
         customers: state.customers.customers,
-        filter: state.customers.filter
+        filter: state.customers.filter,
+        cities: state.support.cities
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         getCustomers: () => dispatch(getCustomers()),
-        currCustomer: (customer) => dispatch(currCustomer(customer))
+        currCustomer: (customer) => dispatch(currCustomer(customer)),
+        getCities: () => dispatch(getCities())
     };
 };
 
