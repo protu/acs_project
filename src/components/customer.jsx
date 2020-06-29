@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { getCustomerService } from '../services/aw_service';
 import { connect } from 'react-redux';
 import { navCustomer, navMain } from '../actions/navActions';
-import { currCustomer } from '../actions/customersActions'
+import { currCustomer, getCustomerService } from '../actions/customersActions'
+import BillsTable from './billsTable';
+import { getBills } from '../actions/billActions';
 
 class Customer extends Component {
      state = {
@@ -11,10 +12,13 @@ class Customer extends Component {
   
     componentDidMount() {
         this.props.navCustomer();
-        const id = this.props.match.params.id;
-        getCustomerService(id).then(response => {
-            this.setState({ customer: response.data });
-        });
+        // const id = this.props.match.params.id;
+        // this.props.getBills(id);
+        // getCustomerService(id).then(response => {
+        //     this.setState({ customer: response.data });
+        // });
+        // this.props.getCustomer(id);
+
     }
 
     componentWillUnmount() {
@@ -22,8 +26,8 @@ class Customer extends Component {
     }
 
     render() {
-        const customer = this.state.customer;
-        this.props.currCustomer(customer);
+        console.log(this.props.customers);
+        const customer = this.props.customer;
         return (<div className="mt-4 ml-4">
             <h3>Name: {customer.Name + " " + customer.Surname}</h3>
             <dl>
@@ -37,8 +41,9 @@ class Customer extends Component {
 }
 
 const mapStateToProps = state => {
+    console.log(state);
     return {
-        customer: state.customers.currCustomer
+        customer: state.customers.current
     }
 }
 
@@ -46,7 +51,6 @@ const mapDispatchToProps = dispatch => {
     return {
         navCustomer: () => dispatch(navCustomer()),
         navMain: () => dispatch(navMain()),
-        currCustomer: (customer) => dispatch(currCustomer(customer))
     }
 }
 

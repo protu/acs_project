@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux';
-import { editCustomer } from '../actions/customersActions'
+import { editCustomer, currCustomer } from '../actions/customersActions'
 
 class EditCustomer extends Component {
 
@@ -28,6 +28,7 @@ class EditCustomer extends Component {
     }
 
     onSubmit = formValues => {
+        this.props.currCustomer(formValues);
         this.props.editCustomer(formValues, this.props.auth.token);
     }
     
@@ -96,8 +97,8 @@ const formWrapped = reduxForm({
     form: 'editCustomer',
     validate,
     onSubmitSuccess: (result, dispatch, props) => {
-        props.history.push(`/list`)
+        props.history.push(`/customer`)
     }
 })(EditCustomer);
 
-export default connect(mapStateToProps, { editCustomer })(formWrapped);
+export default connect(mapStateToProps, { editCustomer, currCustomer })(formWrapped);

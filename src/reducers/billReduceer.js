@@ -1,26 +1,24 @@
-import { GET_CUSTOMERS, GET_CUSTOMER, ADD_CUSTOMER, DEL_CUSTOMER, EDIT_CUSTOMER, CURR_CUSTOMER, FILTER_CUSTOMER } from '../actions/types';
+import { GET_BILLS, ADD_BILL, DEL_BILL, EDIT_BILL, CURR_BILL, FILTER_BILL } from '../actions/types';
 
 const INITIAL_STATE = {
-    customers: [],
+    bills: [],
     current: {},
     filter: {search: ""}
 }
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case GET_CUSTOMERS:
+        case GET_BILLS:
             return { ...state, customers: action.payload };
-        case GET_CUSTOMER:
-            return { ...state, current: action.payload };
-        case ADD_CUSTOMER:
+        case ADD_BILL:
             return {...state}
-        case DEL_CUSTOMER:
+        case DEL_BILL:
             return { ...state, current: action.payload };
-        case EDIT_CUSTOMER:
+        case EDIT_BILL:
             return { ...state, current: action.payload };
-        case CURR_CUSTOMER:
+        case CURR_BILL:
             return { ...state, current: action.payload };
-        case FILTER_CUSTOMER:
+        case FILTER_BILL:
             return {...state, filter: action.filter};
         default:
             return state;

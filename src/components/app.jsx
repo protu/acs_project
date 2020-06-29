@@ -20,7 +20,7 @@ class App extends Component {
                     <Navbar />
                     <Route path="/" exact component={Home} />
                     <Route path="/list" exact component={CustomersTable} />
-                    <Route path="/customer/:id" exact component={Customer} />
+                    <Route path="/customer" exact component={Customer} />
                     {this.props.authenticated && <Route path="/new" exact component={AddCustomer} />}
                     {this.props.authenticated && <Route path="/delete" exact component={DelCustomer} />}
                     {this.props.authenticated && <Route path="/edit" exact component={EditCustomer} />}

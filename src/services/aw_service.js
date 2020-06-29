@@ -45,5 +45,54 @@ export async function registerUser(user) {
     return await srvreq.post('/registeruser', user);
 }
 
+// Bill functions
+
+export function getBillsService() {
+    return srvreq.get('/last200customers');
+}
+
+export function getBillService(id) {
+    return srvreq.get('/customer/' + id);
+}
+
+export async function delBillService(customer, token) {
+    srvreq.defaults.headers.common = {'Authorization': `Bearer ${token}`}
+    return await srvreq.post('/deletecustomer', customer)
+}
+
+export async function addBillService(customer, token) {
+    srvreq.defaults.headers.common = {'Authorization': `Bearer ${token}`}
+    return await srvreq.post('/addcustomer', customer);
+}
+
+export async function editBillService(customer, token) {
+    srvreq.defaults.headers.common = {'Authorization': `Bearer ${token}`}
+    return await srvreq.post('/editcustomer', customer);
+}
+
+// BillItems functions
+
+export function getItemsService() {
+    return srvreq.get('/last200customers');
+}
+
+export function getItemService(id) {
+    return srvreq.get('/customer/' + id);
+}
+
+export async function delItemService(customer, token) {
+    srvreq.defaults.headers.common = {'Authorization': `Bearer ${token}`}
+    return await srvreq.post('/deletecustomer', customer)
+}
+
+export async function addItemService(customer, token) {
+    srvreq.defaults.headers.common = {'Authorization': `Bearer ${token}`}
+    return await srvreq.post('/addcustomer', customer);
+}
+
+export async function editItemService(customer, token) {
+    srvreq.defaults.headers.common = {'Authorization': `Bearer ${token}`}
+    return await srvreq.post('/editcustomer', customer);
+}
 
 export default srvreq;

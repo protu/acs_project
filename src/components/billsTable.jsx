@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getCustomers, currCustomer } from '../actions/customersActions';
+import { getBills } from '../actions/billActions';
 import { connect } from 'react-redux';
 import Pagination from './pagination';
 import { paginate } from '../services/paginate';
@@ -7,7 +7,7 @@ import { compareValues } from '../services/compare';
 import Searchbar from './searchbar';
 import search from '../services/search';
 
-class CustomersTable extends Component {
+class BillsTable extends Component {
     state = {
         pageSize: 10,
         currentPage: 1,
@@ -48,15 +48,15 @@ class CustomersTable extends Component {
     }
 
     render() {
-        var customers = this.props.customers;
+        var bills = this.props.bills;
         if (this.state.sortKey !== null) {
-            customers.sort(compareValues(this.state.sortKey, this.state.sortAsc));
+            bills.sort(compareValues(this.state.sortKey, this.state.sortAsc));
         }
         if (this.props.filter.search !== "" && this.props.filter.search !== undefined) {
-            customers = search(this.props.customers, this.props.filter.search);
+            bills = search(this.props.bills, this.props.filter.search);
         }
-        let customersCount = customers.length;
-        let customersShown = paginate(customers, this.state.currentPage, this.state.pageSize)
+        let billsCount = bills.length;
+        let billsShown = paginate(bills, this.state.currentPage, this.state.pageSize)
         
 
         return (<div className="container mt-3">
@@ -64,7 +64,7 @@ class CustomersTable extends Component {
             <Pagination
                 pageSize={this.state.pageSize}
                 currentPage={this.state.currentPage}
-                itemsCount={customersCount}
+                itemsCount={billsCount}
                 onPageChange={this.handlePageChange}
                 onPageSizeChange={this.handlePageSizeChange}
             />
@@ -79,42 +79,39 @@ class CustomersTable extends Component {
                         <th onClick={() => this.handleTableSort("CityId")}>City ID</th>
                     </tr></thead>
                 <tbody>
-                    {customersShown.map((customer) => (
-                        <tr key={customer.Id} onClick={() => { this.handlePush(this.props, customer.Id) }}>
-                            <td>{customer.Id}</td>
-                            <td>{customer.Name}</td>
-                            <td>{customer.Surname}</td>
-                            <td>{customer.Email}</td>
-                            <td>{customer.Telephone}</td>
-                            <td>{customer.CityId}</td>
+                    {billsShown.map((bill) => (
+                        <tr key={bill.Id} onClick={() => { this.handlePush(this.props, bill.Id) }}>
+                            <td>{bill.Id}</td>
+                            <td>{bill.Name}</td>
+                            <td>{bill.Surname}</td>
+                            <td>{bill.Email}</td>
+                            <td>{bill.Telephone}</td>
+                            <td>{bill.CityId}</td>
                         </tr>
                     ))}
                 </tbody>
             </table>
-            <p>Total customers found: {customersCount}</p>
+            <p>Total bills found: {billsCount}</p>
         </div>);
     }
 
     handlePush = (props, id) => {
-        let customer = this.props.customers.filter(c => c.Id === Number(id))[0];
-        props.currCustomer(customer);
-        props.history.push(`/customer`);
+        props.history.push(`/bill/${id}`);
     }
 
 }
 
 const mapStateToProps = (state) => {
     return {
-        customers: state.customers.customers,
-        filter: state.customers.filter
+        bills: state.bills.bills,
+        filter: state.bills.filter
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getCustomers: () => dispatch(getCustomers()),
-        currCustomer: (customer) => dispatch(currCustomer(customer))
+        getBills: () => dispatch(getBills()),
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CustomersTable);
+export default connect(mapStateToProps, mapDispatchToProps)(BillsTable);
