@@ -28,7 +28,7 @@ class AddCustomer extends Component {
     }
 
     onSubmit = formValues => {
-        this.props.addCustomer(formValues)
+        this.props.addCustomer(formValues, this.props.auth.token);
     }
 
     render() {
@@ -36,11 +36,6 @@ class AddCustomer extends Component {
             <div className="row mt-4">
                 <div className="col-6 mx-auto">
                     <form onSubmit={this.props.handleSubmit(this.onSubmit)} >
-                        <Field
-                            name="Id"
-                            component={this.renderInput}
-                            label="Enter id"
-                        />
                         <Field
                             name="Name"
                             component={this.renderInput}
@@ -88,6 +83,12 @@ const validate = formValues => {
     return errors;
 }
 
+const mapStateToProps = state => {
+    return ({
+        auth: state.auth
+    })
+}
+
 const formWrapped = reduxForm({
     form: 'addCustomer',
     validate,
@@ -96,4 +97,4 @@ const formWrapped = reduxForm({
     }
 })(AddCustomer);
 
-export default connect(null, { addCustomer })(formWrapped);
+export default connect(mapStateToProps, { addCustomer })(formWrapped);

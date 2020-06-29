@@ -28,10 +28,12 @@ class EditCustomer extends Component {
     }
 
     onSubmit = formValues => {
-        this.props.editCustomer(formValues);
+        this.props.editCustomer(formValues, this.props.auth.token);
     }
-
+    
     render() {
+        console.log("Auth");
+        console.log(this.props.auth.token);
         return (
             <div className="row mt-4">
                 <div className="col-6 mx-auto">
@@ -85,7 +87,8 @@ const validate = formValues => {
 
 const mapStateToProps = state => {
     return ({
-        initialValues: state.customers.current
+        initialValues: state.customers.current,
+        auth: state.auth
     })
 }
 
@@ -93,7 +96,7 @@ const formWrapped = reduxForm({
     form: 'editCustomer',
     validate,
     onSubmitSuccess: (result, dispatch, props) => {
-        props.history.push(`/customer/${props.initialValues.id}`)
+        props.history.push(`/list`)
     }
 })(EditCustomer);
 

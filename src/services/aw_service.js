@@ -1,26 +1,29 @@
 import axios from 'axios';
 
-const srvreq = axios.create({baseURL: 'http://www.fulek.com/nks/api/aw'});
+const srvreq = axios.create({ baseURL: 'http://www.fulek.com/nks/api/aw' });
 
 // Customer functions
 
-export function getCustomersService()  {
+export function getCustomersService() {
     return srvreq.get('/last200customers');
 }
 
 export function getCustomerService(id) {
-    return  srvreq.get('/customer/' + id);
+    return srvreq.get('/customer/' + id);
 }
 
-export async function delCustomerService(customer) {
+export async function delCustomerService(customer, token) {
+    srvreq.defaults.headers.common = {'Authorization': `Bearer ${token}`}
     return await srvreq.post('/deletecustomer', customer)
 }
 
-export async function addCustomerService(customer) {
+export async function addCustomerService(customer, token) {
+    srvreq.defaults.headers.common = {'Authorization': `Bearer ${token}`}
     return await srvreq.post('/addcustomer', customer);
 }
 
-export async function editCustomerService(customer) {
+export async function editCustomerService(customer, token) {
+    srvreq.defaults.headers.common = {'Authorization': `Bearer ${token}`}
     return await srvreq.post('/editcustomer', customer);
 }
 
@@ -41,5 +44,6 @@ export async function editUser(user) {
 export async function registerUser(user) {
     return await srvreq.post('/registeruser', user);
 }
+
 
 export default srvreq;

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import GoogleAuth from './googleAuth';
 import { connect } from 'react-redux'
 import { NAV_CUSTOMER } from '../actions/types';
-import SearchBar from './searchbar';
+import AwAuth from './awAuth';
 
 class Navbar extends Component {
 
@@ -19,7 +18,7 @@ class Navbar extends Component {
             }
             {this.showCustomerViewDialog()}
           </ul>
-          <GoogleAuth />
+          <AwAuth/>
         </nav></span>
     );
   }

@@ -9,24 +9,24 @@ export const getCustomers = () => async dispatch => {
   })
 }
 
-export const addCustomer = formValues => async dispatch => {
-  const response = await addCustomerService(formValues);
+export const addCustomer = (customer, token) => async dispatch => {
+  const response = await addCustomerService(customer, token);
   dispatch({
     type: ADD_CUSTOMER,
     payload: response.data
   })
 }
 
-export const delCustomer = customer => async dispatch => {
-  const response = await delCustomerService(customer);
+export const delCustomer = (customer, token) => async dispatch => {
+  const response = await delCustomerService(customer, token);
   dispatch({
     type: DEL_CUSTOMER,
     payload: customer
   })
 }
 
-export const editCustomer = customer => async dispatch => {
-  const response = await editCustomerService(customer);
+export const editCustomer = (customer, token) => async dispatch => {
+  const response = await editCustomerService(customer, token);
   dispatch({
     type: EDIT_CUSTOMER,
     payload: customer
