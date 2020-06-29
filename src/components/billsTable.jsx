@@ -1,32 +1,19 @@
 import React, { Component } from 'react';
-import { getBills } from '../actions/billActions';
+import { getBills, currBill } from '../actions/billActions';
 import { connect } from 'react-redux';
 import Pagination from './pagination';
 import { paginate } from '../services/paginate';
 import { compareValues } from '../services/compare';
-import Searchbar from './searchbar';
-import search from '../services/search';
 
 class BillsTable extends Component {
     state = {
         pageSize: 10,
         currentPage: 1,
-        filter: {search: ""}
     }
 
     componentDidMount() {
-        this.props.getCustomers();
+        this.props.getBills(this.props.customer.Id);
     }
-
-    static getDerivedStateFromProps(props, current_state) {
-        if (current_state.filter.search !== props.filter.search) {
-          return {
-            filter: props.filter,
-            currentPage: 1
-          }
-        }
-        return null
-      }
 
     handlePageChange = (page) => {
         this.setState({ currentPage: page });
@@ -52,15 +39,31 @@ class BillsTable extends Component {
         if (this.state.sortKey !== null) {
             bills.sort(compareValues(this.state.sortKey, this.state.sortAsc));
         }
-        if (this.props.filter.search !== "" && this.props.filter.search !== undefined) {
-            bills = search(this.props.bills, this.props.filter.search);
-        }
         let billsCount = bills.length;
         let billsShown = paginate(bills, this.state.currentPage, this.state.pageSize)
         
 
         return (<div className="container mt-3">
-            <Searchbar />
+            
+            <table className="table table-responsive-md table-hover">
+                <thead className="bg-primary text-white">
+                    <tr>
+                        <th onClick={() => this.handleTableSort("Date")}>Date</th>
+                        <th onClick={() => this.handleTableSort("SellerId")}>SellerId</th>
+                        <th onClick={() => this.handleTableSort("CreditCardId")}>CreditCardId</th>
+                        <th onClick={() => this.handleTableSort("Comment")}>Comment</th>
+                    </tr></thead>
+                <tbody>
+                    {billsShown.map((bill) => (
+                        <tr key={bill.BillNumber} onClick={() => { this.handlePush(this.props) }}>
+                            <td>{bill.Date}</td>
+                            <td>{bill.SellerId}</td>
+                            <td>{bill.CreditCardId}</td>
+                            <td>{bill.Comment}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
             <Pagination
                 pageSize={this.state.pageSize}
                 currentPage={this.state.currentPage}
@@ -68,49 +71,28 @@ class BillsTable extends Component {
                 onPageChange={this.handlePageChange}
                 onPageSizeChange={this.handlePageSizeChange}
             />
-            <table className="table table-responsive-md table-hover">
-                <thead className="bg-primary text-white">
-                    <tr>
-                        <th onClick={() => this.handleTableSort("Id")}>ID</th>
-                        <th onClick={() => this.handleTableSort("Iame")}>Name</th>
-                        <th onClick={() => this.handleTableSort("Surname")}>Surname</th>
-                        <th onClick={() => this.handleTableSort("Email")}>E-mail</th>
-                        <th onClick={() => this.handleTableSort("Telephone")}>Telephone</th>
-                        <th onClick={() => this.handleTableSort("CityId")}>City ID</th>
-                    </tr></thead>
-                <tbody>
-                    {billsShown.map((bill) => (
-                        <tr key={bill.Id} onClick={() => { this.handlePush(this.props, bill.Id) }}>
-                            <td>{bill.Id}</td>
-                            <td>{bill.Name}</td>
-                            <td>{bill.Surname}</td>
-                            <td>{bill.Email}</td>
-                            <td>{bill.Telephone}</td>
-                            <td>{bill.CityId}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
             <p>Total bills found: {billsCount}</p>
         </div>);
     }
 
-    handlePush = (props, id) => {
-        props.history.push(`/bill/${id}`);
+    handlePush = (props) => {
+        props.history.push(`/bill`);
     }
 
 }
 
 const mapStateToProps = (state) => {
     return {
-        bills: state.bills.bills,
-        filter: state.bills.filter
+        bills: state.bill.bills,
+        customer: state.customers.current,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
+
     return {
-        getBills: () => dispatch(getBills()),
+        getBills: (customerId) => dispatch(getBills(customerId)),
+        currBill: (billNumber) => dispatch(currBill(billNumber))
     };
 };
 

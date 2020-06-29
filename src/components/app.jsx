@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Navbar from './navbar';
+import NavigationBar from './navbar';
 import { Route, BrowserRouter } from 'react-router-dom';
 import Customer from './customer';
 import CustomersTable from './customersTable';
@@ -17,7 +17,7 @@ class App extends Component {
         return (
             <div className="container-flex">
                 <BrowserRouter>
-                    <Navbar />
+                    <NavigationBar />
                     <Route path="/" exact component={Home} />
                     <Route path="/list" exact component={CustomersTable} />
                     <Route path="/customer" exact component={Customer} />

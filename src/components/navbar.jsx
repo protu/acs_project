@@ -1,25 +1,34 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import { NAV_CUSTOMER } from '../actions/types';
 import AwAuth from './awAuth';
 
-class Navbar extends Component {
+class NavigationBar extends Component {
 
   render() {
     return (
-      <span>
-        <nav className="navbar navbar-expand-md bg-dark navbar-dark sticky-top">
-          <NavLink className="navbar-brand" to="/">ACS Project</NavLink>
-          <ul className="navbar-nav">
-            <li className="nav-item"><NavLink className="nav-link" to="/list">List</NavLink></li>
-            {this.props.authenticated &&
-              <li className="nav-item"><NavLink className="nav-link" to="/new">New</NavLink></li>
+      <Navbar bg="dark" className="navbar navbar-expand-md navbar-dark sticky-top">
+        <NavLink className="navbar-brand" to="/">ACS Project</NavLink>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto">
+            <NavDropdown title="Customers" id="basic-nav-dropdown">
+              <NavDropdown.Item><NavLink className="dropdown-item" to="/list">List</NavLink></NavDropdown.Item>
+              {this.props.authenticated &&
+                <NavDropdown.Item><NavLink className="dropdown-item" to="/new">New</NavLink></NavDropdown.Item>}
+              {this.showCustomerViewDialog()}
+            </NavDropdown>
+            {this.props.menu === NAV_CUSTOMER && this.props.authenticated &&
+            <Nav.Link href="/addbill">New Bill</Nav.Link>
             }
-            {this.showCustomerViewDialog()}
-          </ul>
-          <AwAuth/>
-        </nav></span>
+          </Nav>
+          <AwAuth />
+        </Navbar.Collapse>
+      </Navbar>
     );
   }
 
@@ -27,8 +36,8 @@ class Navbar extends Component {
     if (this.props.menu === NAV_CUSTOMER && this.props.authenticated) {
       return (
         <React.Fragment>
-          <li className="nav-item"><NavLink className="nav-link" to="/edit">Edit</NavLink></li>
-          <li className="nav-item"><NavLink className="nav-link" to="/delete">Delete</NavLink></li>
+          <NavDropdown.Item><NavLink className="dropdown-item" to="/edit">Edit</NavLink></NavDropdown.Item>
+          <NavDropdown.Item><NavLink className="dropdown-item" to="/delete">Delete</NavLink></NavDropdown.Item>
         </React.Fragment>
       );
     }
@@ -43,4 +52,4 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps)(Navbar);
+export default connect(mapStateToProps)(NavigationBar);

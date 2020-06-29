@@ -13,7 +13,7 @@ class AwAuth extends Component {
   renderAuthButton() {
     if (this.props.isSignedIn) {
       return (
-        <button onClick={this.onSignOutClick} className="btn btn-danger">
+        <button onClick={this.onSignOutClick} className="btn btn-sm btn-danger">
           Sign out
         </button>
       )

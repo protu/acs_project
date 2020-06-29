@@ -33,8 +33,6 @@ class EditCustomer extends Component {
     }
     
     render() {
-        console.log("Auth");
-        console.log(this.props.auth.token);
         return (
             <div className="row mt-4">
                 <div className="col-6 mx-auto">

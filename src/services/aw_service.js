@@ -5,7 +5,7 @@ const srvreq = axios.create({ baseURL: 'http://www.fulek.com/nks/api/aw' });
 // Customer functions
 
 export function getCustomersService() {
-    return srvreq.get('/last200customers');
+    return srvreq.get('/customers');
 }
 
 export function getCustomerService(id) {
@@ -47,52 +47,34 @@ export async function registerUser(user) {
 
 // Bill functions
 
-export function getBillsService() {
-    return srvreq.get('/last200customers');
+export function getBillsService(customerId) {
+    return srvreq.get('/customerbills/' + customerId);
 }
 
-export function getBillService(id) {
-    return srvreq.get('/customer/' + id);
-}
-
-export async function delBillService(customer, token) {
+export async function delBillService(bill, token) {
     srvreq.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-    return await srvreq.post('/deletecustomer', customer)
+    return await srvreq.post('/deleteBill', bill)
 }
 
-export async function addBillService(customer, token) {
+export async function addBillService(bill, token) {
     srvreq.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-    return await srvreq.post('/addcustomer', customer);
+    return await srvreq.post('/addbill', bill);
 }
 
-export async function editBillService(customer, token) {
+// Bill's Items functions
+
+export function getItemsService(billId) {
+    return srvreq.get('/billitems/' + billId);
+}
+
+export async function delItemService(item, token) {
     srvreq.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-    return await srvreq.post('/editcustomer', customer);
+    return await srvreq.post('/deleteitem', item)
 }
 
-// BillItems functions
-
-export function getItemsService() {
-    return srvreq.get('/last200customers');
-}
-
-export function getItemService(id) {
-    return srvreq.get('/customer/' + id);
-}
-
-export async function delItemService(customer, token) {
+export async function addItemService(item, token) {
     srvreq.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-    return await srvreq.post('/deletecustomer', customer)
-}
-
-export async function addItemService(customer, token) {
-    srvreq.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-    return await srvreq.post('/addcustomer', customer);
-}
-
-export async function editItemService(customer, token) {
-    srvreq.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-    return await srvreq.post('/editcustomer', customer);
+    return await srvreq.post('/additem', item);
 }
 
 export default srvreq;

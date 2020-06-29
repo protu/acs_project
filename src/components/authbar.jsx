@@ -34,7 +34,7 @@ class AuthBar extends Component {
                     type="password"
                     component="input"
                 />
-                <button type="submit" className="btn btn-success">Login</button>
+                <button type="submit" className="btn btn-sm btn-success">Login</button>
             </form>
         )
     }

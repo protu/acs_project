@@ -1,4 +1,4 @@
-import { getBillsService, addBillService, delBillService, editBillService } from '../services/aw_service';
+import { getBillsService, addBillService, delBillService } from '../services/aw_service';
 import { GET_BILLS, ADD_BILL, DEL_BILL, EDIT_BILL, FILTER_BILL, CURR_BILL } from './types';
 
 export const getBills = (customer) => async dispatch => {
@@ -21,14 +21,6 @@ export const delBill = (customer, token) => async dispatch => {
   const response = await delBillService(customer, token);
   dispatch({
     type: DEL_BILL,
-    payload: customer
-  })
-}
-
-export const editBill = (customer, token) => async dispatch => {
-  const response = await editBillService(customer, token);
-  dispatch({
-    type: EDIT_BILL,
     payload: customer
   })
 }
