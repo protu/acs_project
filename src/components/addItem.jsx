@@ -48,7 +48,6 @@ class AddItem extends Component {
     }
 
     onSubmit = formValues => {
-        console.log(formValues);
         if (!formValues.cancel || Object.keys(formValues).length > 1) {
             this.props.addItem({
                 ProductId: formValues.Products,

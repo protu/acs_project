@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux';
 import { signIn } from '../actions/loginActions'
+import { NavLink, withRouter } from 'react-router-dom';
 
 class AuthBar extends Component {
 
@@ -19,23 +20,26 @@ class AuthBar extends Component {
 
     render() {
         return (
-            <form className="form-inline ml-auto" onSubmit={this.props.handleSubmit(this.onSubmit)} >
-                <Field
-                    name="username"
-                    id="username"
-                    placeholder="Username"
-                    type="text"
-                    component="input"
-                />
-                <Field
-                    name="password"
-                    id="password"
-                    placeholder="Password"
-                    type="password"
-                    component="input"
-                />
-                <button type="submit" className="btn btn-sm btn-success">Login</button>
-            </form>
+            <span className="form-inline">
+                <form className="form-inline ml-auto" onSubmit={this.props.handleSubmit(this.onSubmit)} >
+                    <Field
+                        name="username"
+                        id="username"
+                        placeholder="Username"
+                        type="text"
+                        component="input"
+                    />
+                    <Field
+                        name="password"
+                        id="password"
+                        placeholder="Password"
+                        type="password"
+                        component="input"
+                    />
+                    <button type="submit" className="btn btn-sm btn-success">Login</button>
+                </form>
+                <button className="btn btn-sm btn-info"><NavLink className="nav-item text-decoration-none text-white" to="/register">Register</NavLink></button>
+            </span>
         )
     }
 
@@ -43,7 +47,10 @@ class AuthBar extends Component {
 
 const formWrapped = reduxForm({
     form: 'authBar',
+    onSubmitSuccess: (result, dispatch, props) => {
+        props.history.push(`/`)
+    }
 })(AuthBar)
 
 
-export default connect(null, { signIn })(formWrapped);
+export default connect(null, { signIn })(withRouter(formWrapped));

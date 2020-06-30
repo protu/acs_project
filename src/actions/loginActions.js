@@ -11,7 +11,6 @@ export const signIn = (user) => async dispatch => {
 };
 
 export const signOut = () => {
-  console.log("Sign out action");
   return {
     type: SIGN_OUT
   }

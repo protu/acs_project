@@ -67,9 +67,9 @@ export function getItemsService(billId) {
     return srvreq.get('/billitems/' + billId);
 }
 
-export async function delItemService(bill, token) {
+export async function delItemService(item, token) {
     srvreq.defaults.headers.common = { 'Authorization': `Bearer ${token}` }
-    return await srvreq.post('/deleteitem', { id: bill.Id })
+    return await srvreq.post('/deleteitem', item)
 }
 
 export async function addItemService(item, token) {

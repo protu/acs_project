@@ -23,6 +23,7 @@ class CustomersTable extends Component {
         this.props.getCities();
     }
 
+
     static getDerivedStateFromProps(props, current_state) {
         if (current_state.filter.search !== props.filter.search) {
             return {

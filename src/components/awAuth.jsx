@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { signOut } from '../actions/loginActions';
 import AuthBar from './authbar';
+import { withRouter } from 'react-router-dom';
 
 
 class AwAuth extends Component {
 
   onSignOutClick = () => {
     this.props.signOut();
+    this.props.history.push('/');
   }
 
   renderAuthButton() {
@@ -41,4 +43,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AwAuth);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AwAuth));

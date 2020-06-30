@@ -1,24 +1,19 @@
 import React, { Component } from 'react';
-import { getItems } from '../actions/itemActions';
+import { getItems, delItem } from '../actions/itemActions';
 import { connect } from 'react-redux';
 import Pagination from './pagination';
 import { paginate } from '../services/paginate';
 import { compareValues } from '../services/compare';
+import { FaTrash } from 'react-icons/fa'
 
 class ItemsTable extends Component {
     state = {
         pageSize: 10,
         currentPage: 1,
-        refresh: true
     }
 
     componentDidMount() {
         this.props.getItems(this.props.bill.Id);
-    }
-
-    componentWillReceiveProps(props) {
-        let refresh = !this.state.refresh;
-        this.setState({refresh});
     }
 
     handlePageChange = (page) => {
@@ -42,7 +37,6 @@ class ItemsTable extends Component {
 
     render() {
         var items = this.props.items;
-        console.log(items);
         if (this.state.sortKey !== null) {
             items.sort(compareValues(this.state.sortKey, this.state.sortAsc));
         }
@@ -66,6 +60,7 @@ class ItemsTable extends Component {
                                 <td>{Math.round(item.PricePerPiece*100)/100}</td>
                                 <td>{item.Quantity}</td>
                                 <td>{Math.round(item.TotalPrice*100)/100}</td>
+                                <td onClick={() => {this.props.delItem(item, this.props.auth.token)}} className="border-0 text-danger"><FaTrash/></td>
                             </tr>
                         ))}
                     </tbody>
@@ -86,14 +81,16 @@ class ItemsTable extends Component {
 const mapStateToProps = (state) => {
     return {
         bill: state.bills.current,
-        items: state.items.items
+        items: state.items.items,
+        auth: state.auth
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
 
     return {
-        getItems: (billId) => dispatch(getItems(billId))
+        getItems: (billId) => dispatch(getItems(billId)),
+        delItem: (itemId, token) => dispatch(delItem(itemId, token))
     };
 };
 

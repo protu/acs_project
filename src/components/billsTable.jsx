@@ -19,6 +19,7 @@ class BillsTable extends Component {
         this.props.getSellers();
     }
 
+
     handlePageChange = (page) => {
         this.setState({ currentPage: page });
     }

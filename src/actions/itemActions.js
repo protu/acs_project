@@ -9,19 +9,19 @@ export const getItems = (billId) => async dispatch => {
   })
 }
 
-export const addItem = (bill, token) => async dispatch => {
-  const response = await addItemService(bill, token);
+export const addItem = (item, token) => async dispatch => {
+  const response = await addItemService(item, token);
   dispatch({
     type: ADD_ITEM,
     payload: response.data
   })
 }
 
-export const delItem = (bill, token) => async dispatch => {
-  const response = await delItemService(bill, token);
+export const delItem = (item, token) => async dispatch => {
+  const response = await delItemService(item, token);
   dispatch({
     type: DEL_ITEM,
-    payload: bill
+    payload: item
   })
 }
 
@@ -49,10 +49,10 @@ export const getProducts = (subcatId) => async dispatch => {
   })
 }
 
-export const currItem = bill => {
+export const currItem = item => {
   return ({
     type: CURR_ITEM,
-    payload: bill
+    payload: item
   })
 }
 
