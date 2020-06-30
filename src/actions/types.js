@@ -40,3 +40,4 @@ export const NAV_MAIN = 'NAV_MAIN';
 // Support
 
 export const GET_CITIES = 'GET_CITIES';
+export const GET_SELLERS = 'GET_SELLERS';

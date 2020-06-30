@@ -6,6 +6,7 @@ import CustomersTable from './customersTable';
 import AddCustomer from './addCustomer';
 import EditCustomer from './editCustomer';
 import DelCustomer from './delCustomer';
+import AddBill from './addBill';
 import Home from './homePage';
 import { connect } from 'react-redux'
 
@@ -24,6 +25,7 @@ class App extends Component {
                     {this.props.authenticated && <Route path="/new" exact component={AddCustomer} />}
                     {this.props.authenticated && <Route path="/delete" exact component={DelCustomer} />}
                     {this.props.authenticated && <Route path="/edit" exact component={EditCustomer} />}
+                    {this.props.authenticated && <Route path="/newbill" exact component={AddBill} />}
                 </BrowserRouter>
             </div>
         );

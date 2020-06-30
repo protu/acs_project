@@ -23,7 +23,7 @@ class NavigationBar extends Component {
               {this.showCustomerViewDialog()}
             </NavDropdown>
             {this.props.menu === NAV_CUSTOMER && this.props.authenticated &&
-              <Nav.Link href="/addbill">New Bill</Nav.Link>
+              <NavLink className="nav-link" to="/newbill">New Bill</NavLink>
             }
           </Nav>
           <AwAuth />

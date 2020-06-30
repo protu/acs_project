@@ -83,4 +83,8 @@ export function getCitiesService() {
     return srvreq.get('/cities');
 }
 
+export function getSellersService() {
+    return srvreq.get('/sellers');
+}
+
 export default srvreq;
