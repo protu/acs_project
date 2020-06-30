@@ -9,7 +9,7 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case GET_ITEMS:
-            return { ...state, customers: action.payload };
+            return { ...state, items: action.payload };
         case ADD_ITEM:
             return {...state}
         case DEL_ITEM:

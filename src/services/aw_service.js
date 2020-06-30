@@ -5,7 +5,7 @@ const srvreq = axios.create({ baseURL: 'http://www.fulek.com/nks/api/aw' });
 // Customer functions
 
 export function getCustomersService() {
-    return srvreq.get('/last200customers');
+    return srvreq.get('/customers');
 }
 
 export function getCustomerService(id) {

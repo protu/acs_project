@@ -63,7 +63,7 @@ class BillsTable extends Component {
                         </tr></thead>
                     <tbody>
                         {billsShown.map((bill) => (
-                            <tr key={bill.Id} onClick={() => { this.handlePush(this.props) }}>
+                            <tr key={bill.Id} onClick={() => { this.handlePush(this.props, bill.Id) }}>
                                 <td>{(new Date(bill.Date)).toLocaleDateString()}</td>
                                 <td>{bill.SellerName + " " + bill.SellerSurname}</td>
                                 <td>{bill.CreditCardId}</td>
@@ -92,7 +92,7 @@ class BillsTable extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        bills: state.bill.bills,
+        bills: state.bills.bills,
         customer: state.customers.current,
         sellers: state.support.sellers
     }

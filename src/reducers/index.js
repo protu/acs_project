@@ -12,7 +12,7 @@ export default combineReducers({
   customers: customersReducer,
   form: formReducer,
   nav: navReducer,
-  bill: billReducer,
-  item: itemReducer,
+  bills: billReducer,
+  items: itemReducer,
   support: supportReducer
 });

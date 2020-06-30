@@ -1,8 +1,8 @@
-import { getItemsService, addItemService, delItemService, editItemService } from '../services/aw_service';
-import { GET_ITEMS, ADD_ITEM, DEL_ITEM, EDIT_ITEM, FILTER_ITEM, CURR_ITEM } from './types';
+import { getItemsService, addItemService, delItemService} from '../services/aw_service';
+import { GET_ITEMS, ADD_ITEM, DEL_ITEM, FILTER_ITEM, CURR_ITEM } from './types';
 
-export const getItems = (bill) => async dispatch => {
-  const response = await getItemsService(bill);
+export const getItems = (billId) => async dispatch => {
+  const response = await getItemsService(billId);
   dispatch({
     type: GET_ITEMS,
     payload: response.data
@@ -21,14 +21,6 @@ export const delItem = (bill, token) => async dispatch => {
   const response = await delItemService(bill, token);
   dispatch({
     type: DEL_ITEM,
-    payload: bill
-  })
-}
-
-export const editItem = (bill, token) => async dispatch => {
-  const response = await editItemService(bill, token);
-  dispatch({
-    type: EDIT_ITEM,
     payload: bill
   })
 }

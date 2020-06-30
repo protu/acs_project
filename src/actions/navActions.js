@@ -1,4 +1,4 @@
-import { NAV_CUSTOMER, NAV_MAIN } from './types';
+import { NAV_CUSTOMER, NAV_MAIN, NAV_BILL } from './types';
 
 export const navCustomer = () => {
     return {
@@ -9,5 +9,11 @@ export const navCustomer = () => {
 export const navMain = () => {
     return {
         type: NAV_MAIN
+    }
+}
+
+export const navBill = () => {
+    return {
+        type: NAV_BILL
     }
 }

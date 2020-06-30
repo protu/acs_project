@@ -7,6 +7,7 @@ import AddCustomer from './addCustomer';
 import EditCustomer from './editCustomer';
 import DelCustomer from './delCustomer';
 import AddBill from './addBill';
+import Bill from './bill';
 import Home from './homePage';
 import { connect } from 'react-redux'
 
@@ -26,6 +27,7 @@ class App extends Component {
                     {this.props.authenticated && <Route path="/delete" exact component={DelCustomer} />}
                     {this.props.authenticated && <Route path="/edit" exact component={EditCustomer} />}
                     {this.props.authenticated && <Route path="/newbill" exact component={AddBill} />}
+                    {this.props.authenticated && <Route path="/bill" exact component={Bill} />}
                 </BrowserRouter>
             </div>
         );
