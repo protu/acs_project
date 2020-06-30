@@ -23,15 +23,17 @@ export const DEL_BILL = 'DELETE_BILL';
 export const CURR_BILL = 'CURR_BILL';
 export const FILTER_BILL = 'FILTER_BILL';
 
-// Bills
+
+// Bills items
 export const CREATE_ITEM = 'CREATE_ITEM';
 export const GET_ITEMS = 'GET_ITEMS';
-export const GET_ITEM = 'GET_ITEM';
 export const ADD_ITEM = 'ADD_ITEM';
-export const EDIT_ITEM = 'EDIT_ITEM';
 export const DEL_ITEM = 'DELETE_ITEM';
 export const CURR_ITEM = 'CURR_ITEM';
-export const FILTER_ITEM = 'FILTER_ITEM';
+export const ITEM_CATEGORY = 'ITEM_CATEGORY';
+export const ITEM_SUBCATEGORY = 'ITEM_SUBCATEGORY';
+export const ITEM_PRODUCT = 'ITEM_PRODUCT';
+
 
 // Navbar
 export const NAV_CUSTOMER = 'NAV_CUSTOMER';

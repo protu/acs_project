@@ -1,5 +1,5 @@
 import { getBillsService, addBillService, delBillService } from '../services/aw_service';
-import { GET_BILLS, ADD_BILL, DEL_BILL, FILTER_BILL, CURR_BILL } from './types';
+import { GET_BILLS, ADD_BILL, DEL_BILL, CURR_BILL } from './types';
 
 export const getBills = (customer) => async dispatch => {
   const response = await getBillsService(customer);
@@ -32,10 +32,4 @@ export const currBill = bill => {
   })
 }
 
-export const filterBill = filter => {
-  return({
-    type: FILTER_BILL,
-    filter: filter
-  })
-}
 

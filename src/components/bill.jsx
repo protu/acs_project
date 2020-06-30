@@ -47,7 +47,7 @@ class Bill extends Component {
                                 </dl>
                             </div>
                         </div>
-                        <ItemsTable />
+                        <ItemsTable itemsCount={this.props.items.length}/>
                     </div>
                 }
             </React.Fragment>
@@ -61,7 +61,9 @@ const mapStateToProps = state => {
         bill: state.bills.current,
         authenticated: state.auth.isSignedIn,
         cities: state.support.cities,
-        sellers: state.support.sellers
+        sellers: state.support.sellers,
+        items: state.items.items
+
     }
 }
 

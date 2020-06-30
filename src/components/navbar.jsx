@@ -47,11 +47,14 @@ class NavigationBar extends Component {
   showBillDialog = () => {
     if (this.props.menu === NAV_BILL && this.props.authenticated) {
       return (
-        <NavDropdown title="Bills" id="basic-nav-dropdown">
-          <NavLink className="dropdown-item" to="/customer">Customers's list</NavLink>
-          <NavLink className="dropdown-item" to="/newbill">New for customer</NavLink>
-          <NavLink className="dropdown-item" to="/deletebill">Delete</NavLink>
-        </NavDropdown>
+        <React.Fragment>
+          <NavDropdown title="Bills" id="basic-nav-dropdown">
+            <NavLink className="dropdown-item" to="/customer">Customers's list</NavLink>
+            <NavLink className="dropdown-item" to="/newbill">New for customer</NavLink>
+            <NavLink className="dropdown-item" to="/deletebill">Delete</NavLink>
+          </NavDropdown>
+          <NavLink className="nav-link" to="/newitem">New Item</NavLink>
+        </React.Fragment>
       )
     }
   }

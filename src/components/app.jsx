@@ -7,6 +7,7 @@ import AddCustomer from './addCustomer';
 import EditCustomer from './editCustomer';
 import DelCustomer from './delCustomer';
 import AddBill from './addBill';
+import AddItem from './addItem';
 import DelBill from './delBill';
 import Bill from './bill';
 import Home from './homePage';
@@ -30,6 +31,7 @@ class App extends Component {
                     {this.props.authenticated && <Route path="/newbill" exact component={AddBill} />}
                     {this.props.authenticated && <Route path="/bill" exact component={Bill} />}
                     {this.props.authenticated && <Route path="/deletebill" exact component={DelBill} />}
+                    {this.props.authenticated && <Route path="/newitem" exact component={AddItem} />}
                 </BrowserRouter>
             </div>
         );

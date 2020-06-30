@@ -9,10 +9,16 @@ class ItemsTable extends Component {
     state = {
         pageSize: 10,
         currentPage: 1,
+        refresh: true
     }
 
     componentDidMount() {
         this.props.getItems(this.props.bill.Id);
+    }
+
+    componentWillReceiveProps(props) {
+        let refresh = !this.state.refresh;
+        this.setState({refresh});
     }
 
     handlePageChange = (page) => {
