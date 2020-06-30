@@ -17,12 +17,12 @@ class AddBill extends Component {
         }
     }
 
-    renderInput = ({ input, label, meta }) => {
+    renderInput = (props) => {
         return (
             <div className="form-group">
-                <label htmlFor={input.name}>{label}</label>
-                <input id={input.name} {...input} className="form-control" />
-                {this.renderError(meta)}
+                <label htmlFor={props.input.name}>{props.label}</label>
+                <input id={props.input.name} {...props.input} type={props.type} className="form-control" />
+                {this.renderError(props.meta)}
             </div>
         );
     }
@@ -31,7 +31,12 @@ class AddBill extends Component {
         return (
             <div className="form-group">
                 <label htmlFor={props.input.name}>{props.label}</label>
-                <input id={props.id} {...props.input} type={props.type} className="form-control" />
+                <select id={props.id} {...props.input} type={props.type} className="form-control" >
+                <option value="">Select Seller</option>
+                            {props.options.map(s => (
+                                <option key={s.Id} value={s.Id}>{s.Name} {s.Surname}</option>
+                            ))}
+                </select>
                 {this.renderError(props.meta)}
             </div>
         );
@@ -49,8 +54,7 @@ class AddBill extends Component {
     }
 
     onSubmit = formValues => {
-        console.log(formValues);
-        // this.props.addBill(formValues, this.props.auth.token);
+        this.props.addBill({...formValues, CustomerID: this.props.customer.Id}, this.props.auth.token);
     }
 
     render() {
@@ -61,22 +65,32 @@ class AddBill extends Component {
                         <Field
                             name="SellerId"
                             id="SellerId"
-                            component="select"
+                            component={this.renderSelect}
                             label="Seller"
                             type="select"
-                        >
-                            <option value="">Select Seller</option>
-                            {this.props.sellers.map(s => (
-                                <option key={s.Id} value={s.Id}>{s.Name} {s.Surname}</option>
-                            ))}
-                            </Field>
+                            parse={Number}
+                            props = {{options: this.props.sellers}}
+                        />
                         <Field className="form-group"
                             name="Date"
                             type="date"
-                            props={{type: "date"}}
-                            component="input"
+                            component={this.renderInput}
                             label="Date"
                             placeholder="Date"
+                        />
+                        <Field
+                            name="BillNumber"
+                            props={{type: "text"}}
+                            component={this.renderInput}
+                            label="Bill Number"
+                            placeholder="Bill Number"
+                        />
+                        <Field
+                            name="CreditCardId"
+                            props={{type: "text"}}
+                            component={this.renderInput}
+                            label="Credit Card Id"
+                            placeholder="Credit Card Id"
                         />
                         <Field
                             name="Comment"
@@ -100,7 +114,8 @@ const validate = formValues => {
 const mapStateToProps = state => {
     return ({
         auth: state.auth,
-        sellers: state.support.sellers
+        sellers: state.support.sellers,
+        customer: state.customers.current
     })
 }
 

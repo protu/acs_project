@@ -16,6 +16,7 @@ class Customer extends Component {
     render() {
         const customer = this.props.customer;
         var city = this.props.cities.find(city => city.Id === customer.CityId);
+
         if (!city) {city = {Name: ""}};
         return (
             <div>
@@ -27,7 +28,7 @@ class Customer extends Component {
                         <dt className="row col-sm-2">City:</dt><dd className="col-sm-5">{city.Name}</dd>
                     </dl>
                 </div>
-                {this.props.authenticated && <BillsTable />}
+                {this.props.authenticated && <BillsTable {...this.props}/>}
             </div>
         );
     }

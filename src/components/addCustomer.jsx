@@ -27,8 +27,25 @@ class AddCustomer extends Component {
         );
     }
 
+    renderSelect = (props) => {
+        return (
+            <div className="form-group">
+                <label htmlFor={props.input.name}>{props.label}</label>
+                <select id={props.id} {...props.input} type={props.type} className="form-control" >
+                    <option value="">Select City</option>
+                    {props.options.map(s => (
+                        <option key={s.Id} value={s.Id}>{s.Name}</option>
+                    ))}
+                </select>
+                {this.renderError(props.meta)}
+            </div>
+        );
+    }
+
     onSubmit = formValues => {
-        this.props.addCustomer(formValues, this.props.auth.token);
+        if (!formValues.cancel || Object.keys(formValues).length > 1) {
+            this.props.addCustomer(formValues, this.props.auth.token);
+        }
     }
 
     render() {
@@ -58,10 +75,15 @@ class AddCustomer extends Component {
                         />
                         <Field
                             name="CityId"
-                            component={this.renderInput}
-                            label="Enter city ID"
+                            id="CityId"
+                            component={this.renderSelect}
+                            label="Select city"
+                            type="select"
+                            parse={Number}
+                            props={{ options: this.props.cities }}
                         />
-                        <button className="btn btn-primary">Submit</button>
+                        <button className="btn btn-primary" type="submit" >Submit</button>
+                        <button className="btn btn-secondary" onClick={this.onSubmit({ cancel: true })} >Cancel</button>
                     </form>
                 </div></div>
         )
@@ -85,7 +107,8 @@ const validate = formValues => {
 
 const mapStateToProps = state => {
     return ({
-        auth: state.auth
+        auth: state.auth,
+        cities: state.support.cities
     })
 }
 
