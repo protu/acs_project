@@ -19,7 +19,7 @@ class Customer extends Component {
 
         if (!city) {city = {Name: ""}};
         return (
-            <div>
+            <div className="container">
                 <div className="mt-4 ml-4">
                     <h3>Name: {customer.Name + " " + customer.Surname}</h3>
                     <dl>

@@ -54,7 +54,9 @@ class AddBill extends Component {
     }
 
     onSubmit = formValues => {
-        this.props.addBill({...formValues, CustomerID: this.props.customer.Id}, this.props.auth.token);
+        if (!formValues.cancel || Object.keys(formValues).length > 1) {
+            this.props.addBill({...formValues, CustomerID: this.props.customer.Id}, this.props.auth.token);
+        }
     }
 
     render() {
@@ -99,7 +101,9 @@ class AddBill extends Component {
                             label="Comment"
                             placeholder="Comment"
                         />
-                        <button className="btn btn-primary">Submit</button>
+                        <button className="btn btn-primary" type="submit">Submit</button>
+                        <button className="btn btn-secondary" onClick={this.onSubmit({ cancel: true })} >Cancel</button>
+
                     </form>
                 </div></div>
         )

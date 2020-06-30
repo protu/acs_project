@@ -5,7 +5,7 @@ const srvreq = axios.create({ baseURL: 'http://www.fulek.com/nks/api/aw' });
 // Customer functions
 
 export function getCustomersService() {
-    return srvreq.get('/customers');
+    return srvreq.get('/last200customers');
 }
 
 export function getCustomerService(id) {
@@ -67,14 +67,14 @@ export function getItemsService(billId) {
     return srvreq.get('/billitems/' + billId);
 }
 
-export async function delItemService(item, token) {
+export async function delItemService(bill, token) {
     srvreq.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-    return await srvreq.post('/deleteitem', item)
+    return await srvreq.post('/deleteitem', {id : bill.Id})
 }
 
-export async function addItemService(item, token) {
+export async function addItemService(bill, token) {
     srvreq.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-    return await srvreq.post('/additem', item);
+    return await srvreq.post('/additem', bill);
 }
 
 // Other

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { NAV_CUSTOMER } from '../actions/types';
+import { NAV_CUSTOMER, NAV_BILL } from '../actions/types';
 import AwAuth from './awAuth';
 
 class NavigationBar extends Component {
@@ -25,6 +25,7 @@ class NavigationBar extends Component {
             {this.props.menu === NAV_CUSTOMER && this.props.authenticated &&
               <NavLink className="nav-link" to="/newbill">New Bill</NavLink>
             }
+            {this.showBillDialog()}
           </Nav>
           <AwAuth />
         </Navbar.Collapse>
@@ -40,6 +41,18 @@ class NavigationBar extends Component {
           <NavLink className="dropdown-item" to="/delete">Delete</NavLink>
         </React.Fragment>
       );
+    }
+  }
+
+  showBillDialog = () => {
+    if (this.props.menu === NAV_BILL && this.props.authenticated) {
+      return (
+        <NavDropdown title="Bills" id="basic-nav-dropdown">
+          <NavLink className="dropdown-item" to="/customer">Customers's list</NavLink>
+          <NavLink className="dropdown-item" to="/newbill">New for customer</NavLink>
+          <NavLink className="dropdown-item" to="/deletebill">Delete</NavLink>
+        </NavDropdown>
+      )
     }
   }
 

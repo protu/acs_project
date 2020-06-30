@@ -57,14 +57,16 @@ class BillsTable extends Component {
                     <thead className="bg-primary text-white">
                         <tr>
                             <th onClick={() => this.handleTableSort("Date")}>Date</th>
+                            <th onClick={() => this.handleTableSort("BillNumber")}>Bill Number</th>
                             <th onClick={() => this.handleTableSort("SellerName")}>Seller</th>
-                            <th onClick={() => this.handleTableSort("CreditCardId")}>CreditCardId</th>
+                            <th onClick={() => this.handleTableSort("CreditCardId")}>Credit Card Id</th>
                             <th onClick={() => this.handleTableSort("Comment")}>Comment</th>
                         </tr></thead>
                     <tbody>
                         {billsShown.map((bill) => (
                             <tr key={bill.Id} onClick={() => { this.handlePush(this.props, bill.Id) }}>
                                 <td>{(new Date(bill.Date)).toLocaleDateString()}</td>
+                                <td>{bill.BillNumber}</td>
                                 <td>{bill.SellerName + " " + bill.SellerSurname}</td>
                                 <td>{bill.CreditCardId}</td>
                                 <td>{bill.Comment}</td>

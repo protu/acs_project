@@ -25,7 +25,7 @@ class Bill extends Component {
         return (
             <React.Fragment>
                 {this.props.authenticated &&
-                    <div>
+                    <div className="container">
                         <div className="row ml-2 mt-4">
                             <div className="col-sm-6">
                                 <h3><NavLink to="/customer">Customer:</NavLink></h3>
